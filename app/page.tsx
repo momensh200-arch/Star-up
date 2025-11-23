@@ -1,41 +1,53 @@
-import Image from "next/image";
+import Image from 'next/image';
+
 
 export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        {/* Your store logo */}
-        <Image
-          className="dark:invert"
-          src="/logo.png"   // replace with your logo file in /public
-          alt="Store-Up logo"
-          width={120}
-          height={40}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            Welcome to Store-Up!
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            The best e-commerce platform for Syria. Browse products, make purchases, and enjoy fast delivery.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="/products"  // link to your product page
-          >
-            Shop Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="/about"
-          >
-            About Us
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+return (
+<div className="min-h-[70vh] flex flex-col items-center justify-center">
+<section className="w-full bg-white rounded-lg shadow p-8">
+<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+<div>
+<h1 className="text-4xl font-bold">Welcome to Store-Up</h1>
+<p className="mt-3 text-zinc-600">Buy and sell online in Syria — local stores, trusted sellers.</p>
+<div className="mt-6 flex gap-3">
+<a href="/products" className="rounded-full bg-blue-600 px-5 py-3 text-white font-medium hover:bg-blue-700">Shop Now</a>
+<a href="/about" className="rounded-full border px-5 py-3 text-zinc-800 hover:bg-zinc-100">Learn More</a>
+</div>
+</div>
+
+
+<div className="w-full md:w-1/3">
+<Image src="/product1.jpg" alt="featured" width={500} height={400} className="rounded" />
+</div>
+</div>
+</section>
+
+
+<section className="w-full mt-10">
+<h2 className="text-2xl font-semibold mb-4">Featured products</h2>
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+{/* Example product cards that link to /products */}
+<a href="/products" className="block border rounded-lg p-4 hover:shadow-lg">
+<Image src="/product1.jpg" alt="p1" width={600} height={400} className="rounded h-48 w-full object-cover" />
+<h3 className="mt-3 font-semibold">Featured Product 1</h3>
+<p className="text-zinc-700">$10.00</p>
+</a>
+
+
+<a href="/products" className="block border rounded-lg p-4 hover:shadow-lg">
+<Image src="/product2.jpg" alt="p2" width={600} height={400} className="rounded h-48 w-full object-cover" />
+<h3 className="mt-3 font-semibold">Featured Product 2</h3>
+<p className="text-zinc-700">$20.00</p>
+</a>
+
+
+<a href="/products" className="block border rounded-lg p-4 hover:shadow-lg">
+<Image src="/product3.jpg" alt="p3" width={600} height={400} className="rounded h-48 w-full object-cover" />
+<h3 className="mt-3 font-semibold">Featured Product 3</h3>
+<p className="text-zinc-700">$15.00</p>
+</a>
+</div>
+</section>
+</div>
+);
 }
