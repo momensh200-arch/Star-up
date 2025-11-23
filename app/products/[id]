@@ -1,0 +1,53 @@
+// app/products/[id]/page.tsx
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
+type Props = { params: { id: string } };
+
+const demoProducts = {
+  '1': { id: 1, name: 'Product 1', price: '10.00', image: '/product1.jpg', description: 'High quality item.' },
+  '2': { id: 2, name: 'Product 2', price: '20.00', image: '/product2.jpg', description: 'Popular seller.' },
+  '3': { id: 3, name: 'Product 3', price: '15.00', image: '/product3.jpg', description: 'Best value.' },
+};
+
+export default function ProductDetail({ params }: Props) {
+  const product = demoProducts[params.id] || null;
+  const router = useRouter();
+
+  if (!product) {
+    return <div className="p-8">Product not found</div>;
+  }
+
+  return (
+    <main className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <Image src={product.image} alt={product.name} width={800} height={600} className="rounded object-cover" />
+      </div>
+
+      <div>
+        <h1 className="text-3xl font-bold">{product.name}</h1>
+        <p className="mt-3 text-zinc-700">{product.description}</p>
+        <div className="mt-4 text-2xl font-semibold">${product.price}</div>
+
+        <div className="mt-6 flex gap-3">
+          <button
+            onClick={() => {
+              // add to cart — uses localStorage helper
+              if (typeof window !== 'undefined') {
+                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                cart.push({ ...product, qty: 1 });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                router.push('/cart');
+              }
+            }}
+            className="rounded bg-blue-600 px-6 py-3 text-white"
+          >
+            Add to cart
+          </button>
+          <button onClick={() => router.back()} className="rounded border px-6 py-3">Back</button>
+        </div>
+      </div>
+    </main>
+  );
+}
+
